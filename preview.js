@@ -1,16 +1,20 @@
 $( document ).ready(function() {
-	if ( $("#preview-banner").length ) {
-		$("#advanced-options").after('<div class="btn btn-success" id="theNextButton" style="margin-left:8px;"><span class="explain-text">Next Page</span></div>');
-		$("#theNextButton").after('<div class="btn btn-danger" id="theJFEButton" style="margin-left:8px;"><span class="explain-text">Turn off JFE</span></div>');
-		$("#theJFEButton").after('<div class="btn btn-primary" id="theSurveyIDButton" style="margin-left:8px;"><span class="explain-text">Get Survey ID</span></div>');
-	} 
+	var toolboxOn;
+	restore_options();
 
-	if ( $("#PreviewBanner").length ) {
-		$(".Restart").after('<div class="InsetButton" id="theNextButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Next Page</span><span class="R"></span></div>');
-		$("#theNextButton").after('<div class="InsetButton" id="theSurveyIDButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Get Survey ID</span><span class="R"></span></div>');
-		$(".OptionContainerDiv").css("width","900px")
-	} 
-	
+	function loadUp() {
+		if ( $("#preview-banner").length && toolboxOn ) {
+			$("#advanced-options").after('<div class="btn btn-success" id="theNextButton" style="margin-left:8px;"><span class="explain-text">Next Page</span></div>');
+			$("#theNextButton").after('<div class="btn btn-danger" id="theJFEButton" style="margin-left:8px;"><span class="explain-text">Turn off JFE</span></div>');
+			$("#theJFEButton").after('<div class="btn btn-primary" id="theSurveyIDButton" style="margin-left:8px;"><span class="explain-text">Get Survey ID</span></div>');
+		} 
+
+		if ( $("#PreviewBanner").length && toolboxOn ) {
+			$(".Restart").after('<div class="InsetButton" id="theNextButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Next Page</span><span class="R"></span></div>');
+			$("#theNextButton").after('<div class="InsetButton" id="theSurveyIDButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Get Survey ID</span><span class="R"></span></div>');
+			$(".OptionContainerDiv").css("width","900px")
+		} 		
+	}
 
 	$("#theNextButton").click(function() {
 		theNextPage();
@@ -80,6 +84,22 @@ $( document ).ready(function() {
 		$("#copyAlert").fadeOut(700);
 	}
 
+	function restore_options() {
+		chrome.storage.sync.get({
+	    	savedStatus: ''
+		}, function(items) {
+			if(items.savedStatus) {
+				console.log("true path");
+				toolboxOn = true;
+				loadUp();
+			} else {
+				console.log("false path");
+				toolboxOn = false;
+				loadUp();
+			}
+		});
+	}
+	
 });
 
 
