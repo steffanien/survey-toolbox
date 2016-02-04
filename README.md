@@ -1,16 +1,15 @@
-# chrome-ext-vanilla
-Base level extension that can be forked to build your own! 
+# Survey Toolbox
+Making Qualtrics survey troubleshooting easier
 
 ##Features
-Currently this extension is set to have an options page, a css page, a popup window for the top right of Chrome, and a javascript page that will inject into a page on page load. 
+1. Additions to Preview Survey Banner
+	- Next button in the preview bar
+	- Button to turn off JFE
+	- Button to automatically copy Survey ID to your clipboard
+2. Works on JFE and SE Survey Previews
+3. Ability to turn on and off in case you need to do an external screenshare and don't want to explain what the "trun off JFE" button does
 
-##Fork me! 
-To use this as a base for your extension, go ahead and fork it! For help in forking, click here: https://help.github.com/articles/fork-a-repo/
+##How can I contribute?
+Fork the repo and add anything you may think adds to survey troubleshooting efficiency. If you make something cool, make a pull request and one of the admins for the repo will look at adding it to the live extension.
 
-##Help with Git
-New to Git? Check out this tutorial: http://rogerdudler.github.io/git-guide/
-It may also help to see the overall workflow: http://www.toptal.com/git/git-workflows-for-pros-a-good-git-guide
 
-##Additional Help
-
-See https://developer.chrome.com/extensions/getstarted for more help
