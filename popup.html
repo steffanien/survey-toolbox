@@ -1,7 +1,7 @@
 <div id='Outer'>
 	<h3>Survey Toolbox</h3>
-	<p></p>
-	<a id='options' href='options.html' target='_blank'>Configure</a>
+	<div class="btn" id="turnOn">Turn On Toolbox</div>
+	<div class="btn" id="turnOff">Turn Off Toolbox</div>
 </div>
 
 <style>
@@ -9,26 +9,48 @@ body {
 	padding: 0;
 	margin: 0;
 }
-h3 {
-	margin-top: 0;
-}
-p {
-	margin-bottom: 1em;
-}
+
 #Outer {
 	width: 300px;
 	text-align: center;
 	font-size: 15px;
 	padding: 1em;
-	font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 200;
 }
-a {
-	padding: 5px 8px;
-	background: #999;
+
+h3 {
+	font-family: sans-serif;
+}
+
+.btn {
+	width: 140px;
+	height: 40px;
 	color: #fff;
-	border-radius: 5px;
-	text-decoration: none;
-	margin: 35px auto;
+	text-align: center;
+	font-family: sans-serif;
+	display: inline-block;
+	border-radius: 4px;
+	margin: 5px;
+	cursor: pointer;
 }
+
+#turnOn {
+	background: #34A853;
+}
+
+#turnOff {
+	background: #EA4335;
+}
+
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 </style>
+
+<script type="text/javascript" src="popup.js"></script>
