@@ -13,20 +13,23 @@ $( document ).ready(function() {
 			$(".Restart").after('<div class="InsetButton" id="theNextButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Next Page</span><span class="R"></span></div>');
 			$("#theNextButton").after('<div class="InsetButton" id="theSurveyIDButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Get Survey ID</span><span class="R"></span></div>');
 			$(".OptionContainerDiv").css("width","900px")
-		} 		
+		} 	
+		console.log("Toolbox is loaded");
+
+		$("#theNextButton").click(function() {
+			theNextPage();
+		});
+
+		$("#theJFEButton").click(function() {
+			jfeOff();
+		});
+
+		$("#theSurveyIDButton").click(function() {
+			getSurveyID();
+		});
+
 	}
 
-	$("#theNextButton").click(function() {
-		theNextPage();
-	});
-
-	$("#theJFEButton").click(function() {
-		jfeOff();
-	});
-
-	$("#theSurveyIDButton").click(function() {
-		getSurveyID();
-	});
 
 	function theNextPage() {
 	  var element = document.getElementById("preview-view");
@@ -89,11 +92,9 @@ $( document ).ready(function() {
 	    	savedStatus: ''
 		}, function(items) {
 			if(items.savedStatus) {
-				console.log("true path");
 				toolboxOn = true;
 				loadUp();
 			} else {
-				console.log("false path");
 				toolboxOn = false;
 				loadUp();
 			}
