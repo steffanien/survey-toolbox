@@ -2,7 +2,7 @@
 {
 	"manifest_version": 2,
 	"name": "Survey Toolbox",
-	"description": "YOUR CUSTOM TAGLINE FOR YOUR EXTENSION",
+	"description": "Survey Troubleshooting made easy",
 	"version": "1.0.0",
 	"permissions": [
 		"activeTab",
@@ -17,8 +17,7 @@
 	"content_scripts": [ /*ANY SCRIPTS OR CSS PAGES YOU WANT TO REFERENCE NEED TO BE PUT HERE*/
 		{
 		"matches": ["http://*/*", "https://*/*"], /*THE PAGE THAT SHOULD TRIGGER THIS EXTENSION*/
-		"js": ["resources/jquery-1.11.3.min.js","stuff.js"], /*ANY JS PAGES THAT SHOULD LOAD*/
-		"css": ["stuff.css"], /*ANY CSS PAGES THAT SHOULD LOAD*/
+		"js": ["resources/jquery-1.11.3.min.js","preview.js"], /*ANY JS PAGES THAT SHOULD LOAD*/
 		"run_at": "document_end" /*WHEN SHOULD THE EXTENSION LOAD THESE SCRIPTS?*/
 		}
 	]
