@@ -1,5 +1,7 @@
 $( document ).ready(function() {
 	var toolboxOn;
+	var url;
+	var restored_URL;
 	restore_options();
 
 	function loadUp() {
@@ -11,7 +13,8 @@ $( document ).ready(function() {
 
 		if ( $("#PreviewBanner").length && toolboxOn ) {
 			$(".Restart").after('<div class="InsetButton" id="theNextButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Next Page</span><span class="R"></span></div>');
-			$("#theNextButton").after('<div class="InsetButton" id="theSurveyIDButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Get Survey ID</span><span class="R"></span></div>');
+			$("#theNextButton").after('<div class="InsetButton" id="theJFEOnButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Turn JFE On</span><span class="R"></span></div>');
+			$("#theJFEOnButton").after('<div class="InsetButton" id="theSurveyIDButton" style="margin-left:8px; cursor: pointer;"><span class="L"></span><span class="explain-text">Get Survey ID</span><span class="R"></span></div>');
 			$(".OptionContainerDiv").css("width","900px")
 		} 	
 		console.log("Toolbox is loaded");
@@ -24,8 +27,12 @@ $( document ).ready(function() {
 			jfeOff();
 		});
 
+		$("#theJFEOnButton").click(function() {
+			jfeOn();
+		});
+
 		$("#theSurveyIDButton").click(function() {
-			getSurveyID();
+			copySurveyIDtoClipboard();
 		});
 
 	}
@@ -41,10 +48,37 @@ $( document ).ready(function() {
 	}
 
 	function jfeOff() {
+		// Get UTL
+		url = window.location.href;
+		save_URL();
+
 		// Get URL and add ?Q_JFE=0
 		var w = window.location.href + "?Q_JFE=0";
 		// Reset Window URL
 		window.location = w;
+	}
+
+	function jfeOn() {
+		// Restore JFE URL
+		restore_URL();
+		// Wait 300 ms to give Chrome time to restore URL  before proceeding
+		setTimeout(function(){ 
+			// Get Non JFE URL Survey ID
+			var sv = getSurveyID()
+			// Check if current survey ID is in the restored URL
+			var n = restored_URL.indexOf(sv);
+			// If Survey IDs match
+			if(n >= 0) {
+				// Reset Window URL
+				window.location = restored_URL;
+			// If Survey IDs don't match
+			} else {
+				// Alert User
+				alert("Error Processing Request. You will have to reopen the survey preview to turn JFE back on")
+			}
+		}, 300);
+
+
 	}
 
 	function getSurveyID() {
@@ -69,7 +103,12 @@ $( document ).ready(function() {
 			var position = sv.indexOf("&");
 			// Cut it out
 			var sv = sv.slice(0,position);
-		}		
+		}
+		return sv;
+	}
+
+	function copySurveyIDtoClipboard() {
+		var sv = getSurveyID();	
 		// Add Hidden Input with Survey ID into DOM
 		$("#theSurveyIDButton").after('<textarea id="hiddenInput" style="position:absolute;z-index:-100;opacity:0">The Test</textarea>');
 		// Set Hidden Input to variable
@@ -100,6 +139,27 @@ $( document ).ready(function() {
 			}
 		});
 	}
+ 
+	function save_URL() {
+		// Set jfeURL variable to url boolean
+		var jfeURL = url;
+		// Save to Chrome storage 
+	  	chrome.storage.sync.set({
+	    	savedURL: jfeURL
+	  	}, function() {
+		});
+	}
+
+
+	function restore_URL() {
+		// Get saved Status from storage
+		chrome.storage.sync.get({
+	    	savedURL: ''
+		}, function(items) {
+			restored_URL = items.savedURL
+		});
+	}
+
 	
 });
 

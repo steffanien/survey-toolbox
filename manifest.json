@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Survey Toolbox",
 	"description": "Survey Troubleshooting made easy",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"permissions": [
 		"activeTab",
 		"storage" 
